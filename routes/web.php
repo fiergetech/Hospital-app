@@ -15,12 +15,11 @@ use App\Http\Controllers\HomeController;
 */
 
 // Default route
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/', [HomeController::class, 'index']);
 
 // Add the route for the HomeController
-Route::get('/home', [HomeController::class, 'redirect'])->name('home');
+Route::get('/home', [HomeController::class, 'redirect']);
 
 // Grouped routes that require authentication
 Route::middleware([
