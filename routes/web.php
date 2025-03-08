@@ -1,11 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 
 /*
-|--------------------------------------------------------------------------
+|---------------------------------------------------------------------------
 | Web Routes
-|--------------------------------------------------------------------------
+|---------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
@@ -13,14 +14,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Default route
 Route::get('/', function () {
     return view('welcome');
 });
 
+// Add the route for the HomeController
+Route::get('/home', [HomeController::class, 'redirect'])->name('home');
+
+// Grouped routes that require authentication
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
-    'verified'
+    'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
