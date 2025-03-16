@@ -16,7 +16,18 @@
       @include('admin.navbar')
       <div class="container-fluid page-body-wrapper">
         <div class="container" style="padding-top: 100px;">
-          <form class="needs-validation" novalidate>
+
+        @if (session()->has('message'))
+          <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            {{ session()->get('message') }}
+          </div>
+        @endif
+        
+          <form class="needs-validation" novalidate enctype="multipart/form-data" action="{{ url('upload_doctor') }}" method="post">
+            @csrf
             <div class="form-group row">
               <label for="name" class="col-sm-2 col-form-label">Nama Dokter</label>
               <div class="col-sm-10">
